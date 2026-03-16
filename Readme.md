@@ -1,2 +1,2 @@
-# ProductoTiramisu
-Repositorio para visor de PDF de Tiramisu.
+# ProductoGalletas
+Repositorio para visor de PDF de Galletas en Bloque.
