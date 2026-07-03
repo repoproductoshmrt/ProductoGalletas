@@ -39,6 +39,7 @@
       cursor:pointer;
     }
     #zoomLevel{font:500 14px system-ui}
+#btnFullscreen{margin-left:auto;padding:4px 10px;font-size:14px;cursor:pointer}
 
     #pages{ width:max-content; }
     .p{
@@ -65,13 +66,22 @@
       <button id="btnZoomOut" type="button" aria-label="Reducir zoom">-</button>
       <button id="btnZoomIn"  type="button" aria-label="Ampliar zoom">+</button>
       <span id="zoomLevel">100%</span>
+      <button id="btnFullscreen" type="button">⛶ Pantalla completa</button>
     </div>
 
     <div id="pages"></div>
   </div>
 
   <!-- PDF.js desde tu repo -->
-  <script src="vendor/pdfjs/pdf.min.js"></script>
+  <script src="vendor/pdfjs/pdf.min.js">
+// Fullscreen
+const btnFullscreen=document.getElementById('btnFullscreen');
+function isFullscreen(){return !!document.fullscreenElement;}
+async function toggleFullscreen(){if(!isFullscreen()){await document.documentElement.requestFullscreen?.();}else{await document.exitFullscreen?.();}}
+btnFullscreen.addEventListener('click',toggleFullscreen);
+document.addEventListener('fullscreenchange',()=>{btnFullscreen.textContent=isFullscreen()?'✕ Salir de pantalla completa':'⛶ Pantalla completa';document.getElementById('docTitle').style.display=isFullscreen()?'none':'';});
+
+</script>
 
   <script>
     pdfjsLib.GlobalWorkerOptions.workerSrc = "vendor/pdfjs/pdf.worker.min.js";
@@ -306,6 +316,14 @@
       el.addEventListener('touchend', endTouch, {passive:true});
       el.addEventListener('touchcancel', endTouch, {passive:true});
     })();
-  </script>
+  
+// Fullscreen
+const btnFullscreen=document.getElementById('btnFullscreen');
+function isFullscreen(){return !!document.fullscreenElement;}
+async function toggleFullscreen(){if(!isFullscreen()){await document.documentElement.requestFullscreen?.();}else{await document.exitFullscreen?.();}}
+btnFullscreen.addEventListener('click',toggleFullscreen);
+document.addEventListener('fullscreenchange',()=>{btnFullscreen.textContent=isFullscreen()?'✕ Salir de pantalla completa':'⛶ Pantalla completa';document.getElementById('docTitle').style.display=isFullscreen()?'none':'';});
+
+</script>
 </body>
 </html>
